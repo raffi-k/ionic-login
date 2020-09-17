@@ -1,20 +1,57 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
+<ion-header no-border>
+  <div class="page-header ion-padding">
+    <img class="logo-img" src="assets/img/logo.png" />
+  </div>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles" refreshingText="Refreshing...">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="wrapper">
+  
+    <div heading-column-lr>
+        <h1>Meals</h1>
+        <ion-label>
+          Enjoy your meals.
+        </ion-label>
+    </div>
+  
+    <div *ngIf="items">
+      <div *ngFor="let item of items" class="meal">
+        <div class="meal__img">
+          <div class="meal__img-wrapper">
+            <img [src]="item.imageUrl" alt="{{item.name}} image" [@inOutAnimation] />
+          </div>
+        </div>
+        <h3 class="meal__details">{{item.name}}</h3>
+      </div>
+    </div>
+    <div class="load-more">
+      <button (click)="getItems()">
+        <img src="assets/img/add.png" alt="">
+      </button>
+    </div>
+
+    <h2>Add Meals</h2>
+    <form #addForm="ngForm">
+      <ion-item transparent>
+        <ion-input [(ngModel)]="newItem.name" name="name" placeholder="name" type="text" required></ion-input>
+      </ion-item>
+      <ion-item transparent>
+        <ion-input [(ngModel)]="newItem.imageUrl" name="imageUrl" placeholder="image url" type="text" required></ion-input>
+      </ion-item>
+      <div linespace></div>
+      <ion-button color="primary" class="ion-button-class" shape="round" fill="solid" size="large" expand="block" (click)="addForm.valid && addItem()">
+        Add item
+      </ion-button>
+    </form>
+    <div class="logout">
+      <a (click)="logout()">
+        Logout
+      </a>
+    </div>
   </div>
 </ion-content>

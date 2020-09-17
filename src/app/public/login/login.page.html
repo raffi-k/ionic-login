@@ -1,0 +1,35 @@
+<ion-header no-border>
+  <div class="page-header ion-padding">
+    <img class="logo-img" src="assets/img/logo.png" alt="food app logo" />
+  </div>
+</ion-header>
+
+<ion-content>
+  <div class="wrapper">
+
+    <div heading-column-lr>
+        <h1>Login / Register</h1>
+        <ion-label>
+          Register now to get the best meals.
+        </ion-label>
+    </div>
+    <form #loginForm="ngForm">
+      <ion-item transparent>
+        <img icon-small src="assets/img/user.png" alt="">
+        <ion-input placeholder="Email" type="email" required name="email" [(ngModel)]="user.email"
+        pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'></ion-input>
+      </ion-item>
+      <ion-item transparent>
+        <img icon-small src="assets/img/lock.png" alt="">
+        <ion-input placeholder="Password" type="password" required name="password" [(ngModel)]="user.password"></ion-input>
+      </ion-item>
+      <div linespace></div>
+      <ion-button type="button" color="primary" class="ion-button-class" shape="round" fill="solid" size="large" expand="block" (click)="loginForm.valid && login()">
+        Login
+      </ion-button>
+      <ion-button type="button" color="secondary" class="ion-button-class" shape="round" fill="solid" size="large" expand="block" (click)="loginForm.valid && register()">
+        Register
+      </ion-button>
+    </form>
+  </div>
+</ion-content>
